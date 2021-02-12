@@ -1,33 +1,63 @@
 /**
  * Contains functions triggered by clicks, to be inserted into page.
  */
+visitedSites = [];
 
-/**
- * Close notification when 'X' button is clicked.
-*/
+ document.addEventListener('DOMContentLoaded', function () {
+     document.getElementById('CCPAButton').addEventListener('click', ccpaButtonClick, false)
+     document.getElementById('CCPADontShow').addEventListener('click', ccpaDontShow, false)
 
-function ccpaClose(){
-    var popup = document.getElementById('CCPAPopup');
-    var close = document.getElementById('CCPAClose');
-    var moreInfo = document.getElementById('CCPAMoreInfo');
-    var button = document.getElementById('CCPAButton');
-    popup.style.display = 'none';
-    close.style.display = 'none';
-    moreInfo.style.display = 'none';
-    button.style.display = 'none';
-}
 
-/**
- * Find and click CCPA opt-out link
- */
-function ccpaButtonClick(){
-    var pageElements = document.getElementsByTagName('*');
-    for(var i = 0; i < pageElements.length; i++) {
+    /**
+     * Close notification when 'X' button is clicked.
+    */
 
-        // If opt-out link is found, click it.
-        if(pageElements[i].innerHTML.toLowerCase().search('do not sell') != -1
-            || pageElements[i].innerHTML.toLowerCase().search('don\'t sell') != -1) {
-            pageElements[i].click();
+   chrome.tabs.query({currentWindow: true, active: true}, function (tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, {id: "check"}, updatePopup)
+    })
+
+    function updatePopup(res){{
+        if(res.check === 1)
+        {
+            var div = document.createElement('div');
+            div.textContent = `This website sells your data. Click above to opt out.`;
+            document.body.appendChild(div);
+        } else {
+            var div = document.createElement('div');
+            div.textContent = `This website does not appear to sell your data. Check the privacy policy for more information`;
+            document.body.appendChild(div);
         }
+    }}
+
+    function ccpaClose(){
+        var popup = document.getElementById('CCPAPopup');
+        var close = document.getElementById('CCPAClose');
+        var moreInfo = document.getElementById('CCPAMoreInfo');
+        var button = document.getElementById('CCPAButton');
+        popup.style.display = 'none';
+        close.style.display = 'none';
+        moreInfo.style.display = 'none';
+        button.style.display = 'none';
     }
-}
+
+    /**
+     * Find and click CCPA opt-out link
+     */
+    function ccpaButtonClick(){
+        chrome.tabs.query({currentWindow: true, active: true}, function (tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, {id: "optout"})
+        })
+    }
+
+    /**
+     * Find and click CCPA opt-out link
+     */
+    function ccpaDontShow(){
+        visitedSites.push(window.location.href);
+
+        chrome.tabs.query({currentWindow: true, active: true}, function (tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, {id: "dontshow"})
+        })
+    }
+
+}, false)

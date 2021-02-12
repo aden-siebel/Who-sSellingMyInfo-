@@ -4,9 +4,8 @@
     "name": "Who's Selling My Info?",
     "author": "Sean O'Connor",
     "version": "0.1",
-  
+
     "description": "Detects whether websites have a 'Do Not Sell My Personal Information' link mandated by CCPA, and makes them easily accessible within the extension.",
-    "homepage_url": "https://github.com/swow2015/Who-sSellingMyInfo-",
     "icons": {
       "48": "icons/icon_active.png"
     },
@@ -17,8 +16,15 @@
 
     "browser_action": {
       "default_icon": "icons/icon_inactive.png",
-      "default_title": "Who's Selling My Info?"
+      "default_title": "Who's Selling My Info?",
+      "default_popup": "notification.html"
     },
+
+    "permissions": [
+        "notifications",
+        "activeTab",
+        "tabs"
+    ],
 
     "content_scripts": [
         {
@@ -26,6 +32,5 @@
             "js": ["check_for_link.js"]
         }
     ]
-  
+
   }
-  

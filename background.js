@@ -3,14 +3,15 @@
  */
 
 // Listen for search results
-browser.runtime.onMessage.addListener(updateIcon);
+chrome.runtime.onMessage.addListener(updateIcon);
 
 // Update icon based on search result
 function updateIcon(response){
     if(response.linkDetected == "yes"){
-        browser.browserAction.setIcon({path: "icons/icon_active.png"});
-    }
-    else{
-        browser.browserAction.setIcon({path: "icons/icon_inactive.png"});
+        chrome.browserAction.setIcon({path: "icons/icon_active.png"});
+    } else if(response.linkDetected == "bad") {
+        chrome.browserAction.setIcon({path: "icons/icon_warning.png"});
+    } else {
+        chrome.browserAction.setIcon({path: "icons/icon_inactive.png"});
     }
 }

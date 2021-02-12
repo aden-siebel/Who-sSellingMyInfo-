@@ -2,12 +2,15 @@
   all: revert;
   width: 250px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: #bd0e0e;
+  font-size: 13px;
+  background-color: rgb(189, 14, 14);
   color: white;
-  position: fixed;
-  z-index: 99;
-  bottom: 15px;
-  left: 15px;
+  padding: 15px;
+  border-width: 10px;
+  border-radius: 10px;
+  border-style: initial;
+  border-color: initial;
+  border-image: initial;
 }
 
 #CCPAMoreInfo {
@@ -16,20 +19,63 @@
   font-size: 10px;
 }
 
+#CCPADontShow {
+  all: revert;
+  color: white;
+  font-size: 10px;
+}
+
 #CCPAClose {
   all: revert;
   position: absolute;
+  font-family: arial;
   top: 5px;
   right: 15px;
   cursor: pointer;
 }
 
 #CCPAButton {
-all: revert;
-background-color: black;
-border: 2px solid white;
-color: white;
-margin: 5px 5% 3px 5%;
-text-align: center;
-cursor: pointer;
+  color: white !important;
+  font-family: Geneva;
+  text-transform: uppercase;
+  text-decoration: none;
+  background-color: black;
+  border-radius: 5px;
+  display: inline-block;
+  border: none;
+  transition: all 0.4s ease 0s;
+  padding: 10px;
+  margin: 10px 0px 0px 0px;
+}
+
+#CCPAButton:hover {
+  background-color: #434343;
+  letter-spacing: 1px;
+  -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+  -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+  box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+  transition: all 0.4s ease 0s;
+}
+
+#CCPADontShow {
+  color: white !important;
+  font-family: Geneva;
+  text-transform: uppercase;
+  text-decoration: none;
+  background-color: black;
+  border-radius: 5px;
+  display: inline-block;
+  border: none;
+  transition: all 0.4s ease 0s;
+  padding: 10px;
+  margin: 10px 0px 0px 0px;
+}
+
+#CCPADontShow:hover {
+  background-color: #434343;
+  letter-spacing: 1px;
+  -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+  -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+  box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+  transition: all 0.4s ease 0s;
 }
